@@ -12,4 +12,5 @@ The command is:
 
 The user's first argument in the code should be the directory path to search 
 (this will also search all subdirectories and their files as well), while the
-second argument should be the date (in Windows format: mm/dd/yy). 
+second argument should be the date (in Windows format: mm/dd/yy) and the third
+arugment should be the end date. 
