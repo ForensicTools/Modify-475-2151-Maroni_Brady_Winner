@@ -12,11 +12,14 @@ elseif($num -eq 1){ #If the user provided one argument, that argument is a direc
        }
        $dirpath = "$($args[0])" #set the directory to search equal to the user provided value
        $time="1/1/15" #still use default time
+       $today = Get-Date
+       $end = $today.ToShortDateString() #use today as end date
        Write-Host "Executing with default time range, modified since 1/1/15"
 }
-else{ #If the user provided two arguments, set the first argument equal to the directory to search and the second equal to the time to check from
+else{ #If the user provided more than one argument, set the first argument equal to the directory to search and the second equal to the time to check from and the third equal the time to check up until
        $time="$($args[1])"
        $dirpath = "$($args[0])"
+       $end = "$($args[2])"
 }
  
 Write-Host $dirpath
@@ -31,7 +34,7 @@ function DirCheck( $dir )
                      {
                            DirCheck $item.FullName #recursively check that folder as well
                            }
-                     elseif ($item.lastwritetime -gt $time) { #if the object is a file, and the file was last modified date is since the time we are checking
+                     elseif (($item.lastwritetime -gt $time) -and ($item.lastwritetime -lt $end)) { #if the object is a file, and the file was last modified date is since the time we are checking
                 Write-Host "File: " $item.FullName "Last Modified: " $item.lastwritetime
                      }
               }
