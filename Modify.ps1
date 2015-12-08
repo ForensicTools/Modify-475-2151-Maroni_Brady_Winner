@@ -36,6 +36,7 @@ function DirCheck( $dir )
                            }
                      elseif (($item.lastwritetime -gt $time) -and ($item.lastwritetime -lt $end)) { #if the object is a file, and the file was last modified date is since the time we are checking
                 Write-Host "File: " $item.FullName "Last Modified: " $item.lastwritetime
+                Write-Output "File: " $item.FullName "Last Modified: " $item.lastwritetime | out-file -Append modify.txt
                      }
               }
 }
